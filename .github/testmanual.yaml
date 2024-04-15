@@ -1,1 +1,20 @@
-My thing
+on:
+  workflow_dispatch:
+    tags:
+      description: testing
+jobs:
+  build_addon_software:
+    runs-on: windows-latest
+    steps:
+      - run: choco install gh
+      - run: gh version
+      - uses: actions/checkout@v4
+      - name: Install PSScriptAnalyzer module
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module PSScriptAnalyzer -ErrorAction Stop
+      - name: Get list of rules
+        shell: pwsh
+        run: |
+          Get-ScriptAnalyzerRule
