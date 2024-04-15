@@ -12,3 +12,4 @@ jobs:
         run: |
           Get-ChildItem
           wsl --help
+          .\makeimage.ps1 testubuntu
