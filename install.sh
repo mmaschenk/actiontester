@@ -26,14 +26,10 @@ cat <<EOD >> ~tud/.irods/irods_environment.json
     "irods_encryption_key_size": 32,
     "irods_encryption_num_hash_rounds": 16,
     "irods_encryption_salt_size": 8,
-    "irods_host": "irods.cloud.tudelft.ninja",
+    "irods_host": "irods.tudelft.nl",
     "irods_port": 1247,
-    "irods_ssl_ca_certificate_file": "",
-    "irods_ssl_certificate_chain_file": "",
-    "irods_ssl_certificate_key_file": "",
-    "irods_ssl_dh_params_file": "",
     "irods_ssl_verify_server": "hostname",
-    "irods_zone_name": "tudcloud"
+    "irods_zone_name": "tud"
 }
 EOD
 
