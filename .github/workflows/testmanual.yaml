@@ -1,7 +1,5 @@
 on:
   workflow_dispatch:
-    tags:
-      description: testing
 jobs:
   build_addon_software:
     runs-on: windows-latest
