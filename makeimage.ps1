@@ -65,6 +65,8 @@ Write-Host "Installed"
 
 wsl.exe -t $distname
 
+wsl.exe --export $distname "$distname.tar"
+7z.exe a "$distname.tgz" "$distname.tar"
+
 Pop-Location
 
-wsl.exe --export $distname outputfile.tar
