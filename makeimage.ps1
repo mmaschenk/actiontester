@@ -55,7 +55,7 @@ $installscript = Get-Content .\install.sh -Raw
 
 Push-Location $env:Home
 
-Write-Output $installscript  | wsl.exe -d $distname 'cat' '|' 'sed' '$ s/.$//' '>' '/tmp/install.sh' # Bloody powershell...
+Write-Output $installscript  | wsl.exe -d $distname 'cat' '|' 'sed' 's/.$//' '>' '/tmp/install.sh' # Bloody powershell...
 Write-Output $installscript  | wsl.exe -d $distname 'cat' '>' '/tmp/install2.sh'
 wsl.exe -d $distname chmod 755 /tmp/install.sh
 wsl.exe -d $distname cat /tmp/install.sh
