@@ -1,5 +1,7 @@
 on:
   push:
+permissions:
+  contents: write
 jobs:
   build_addon_software:
     runs-on: windows-latest
