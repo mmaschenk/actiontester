@@ -1,0 +1,29 @@
+on:
+  push:
+jobs:
+  build_addon_software:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        shell: pwsh
+        run: |
+          Get-ChildItem
+          wsl --help
+          .\makeimage.ps1 tudelft
+          Get-ChildItem
+        if: startsWith(github.ref, 'refs/tags/')
+      - name: Keep artifact
+        uses: actions/upload-artifact@v4
+        with:
+          # Name of the artifact to upload.
+          # Optional. Default is 'artifact'
+          name: wslimage
+          path: tudelft.tgz
+          compression-level: 0
+        if: startsWith(github.ref, 'refs/tags/')
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: tudelft.tgz
