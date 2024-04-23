@@ -71,5 +71,10 @@ wsl.exe --export $distname "$distname.tar"
 Write-Host "Compressing"
 7z.exe a "$distname.tgz" "$distname.tar"
 
+Write-Host "Checksumming"
+$filehash = Get-FileHash "$distname.tgz"
+
+$filehash.Hash | Out-File -FilePath "$distname.tgz.hash"
+
 Pop-Location
 
