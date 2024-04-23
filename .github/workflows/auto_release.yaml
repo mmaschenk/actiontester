@@ -11,9 +11,9 @@ jobs:
         shell: pwsh
         run: |
           Get-ChildItem
-          wsl --help
+          # wsl --help
           #.\makeimage.ps1 tudelft
-          echo "Hello" > tudelft.tgz
+          Get-ChildItem > tudelft.tgz
           Get-ChildItem
         if: startsWith(github.ref, 'refs/tags/')
       - name: Keep artifact
