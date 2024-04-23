@@ -12,7 +12,8 @@ jobs:
         run: |
           Get-ChildItem
           wsl --help
-          .\makeimage.ps1 tudelft
+          #.\makeimage.ps1 tudelft
+          echo "Hello" > tudelft.tgz
           Get-ChildItem
         if: startsWith(github.ref, 'refs/tags/')
       - name: Keep artifact
@@ -29,3 +30,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: tudelft.tgz
+          body_path: README.md
