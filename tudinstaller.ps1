@@ -71,7 +71,7 @@ function Initialize-WSLStoreLocation {
     $fullstorepath = Join-Path -Path $storename -ChildPath $distribution
 
     if (Test-Path $fullstorepath) {
-        throw ("Directory {0} already exists. Will not continue" -f $fullstorepath)
+        throw ("Directory {0} already exists." -f $fullstorepath)
         
     }
 
