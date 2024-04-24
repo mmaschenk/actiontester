@@ -71,8 +71,8 @@ function Initialize-WSLStoreLocation {
     $fullstorepath = Join-Path -Path $storename -ChildPath $distribution
 
     if (Test-Path $fullstorepath) {
-        Write-Host ("Directory {0} already exists. Will not continue" -f $fullstorepath)
-        exit
+        throw ("Directory {0} already exists. Will not continue" -f $fullstorepath)
+        
     }
 
     Write-Host("Fullstorepath: {0}" -f $fullstorepath)
@@ -88,8 +88,6 @@ function  Register-ImageFile {
 
     $cachefile = Update-ImageCacheFile($downloadurl)
     $storepath = Initialize-WSLStoreLocation($registrationname)
-
-
 
     Write-Host("cachefile returned: {0}" -f $cachefile)
     Write-Host("registration name: {0}" -f $registrationname)
