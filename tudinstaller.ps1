@@ -50,10 +50,6 @@ function Update-ImageCacheFile {
         $webclient.DownloadFile($downloadurl, $imagefile.ToString())
         Write-Host "* Imagefile downloaded"
     }
-
-    Write-Host $remotehashvalue.GetType()
-    Write-Host $localhashvalue.GetType()
-
     return $imagefile
 }
 
@@ -70,14 +66,11 @@ function Initialize-WSLStoreLocation {
 
     $fullstorepath = Join-Path -Path $storename -ChildPath $distribution
 
-    Write-Host("Checking for: {0} existence" -f $fullstorepath)
     if (Test-Path $fullstorepath) {
         throw ("Directory {0} already exists." -f $fullstorepath)
     }
-    Write-Host("Going to create: {0} existence" -f $fullstorepath)
     New-Item -Path $fullstorepath -ItemType Directory 
-
-    Write-Host("Created Fullstorepath: {0}" -f $fullstorepath)
+    Write-Host("Created fullstorepath: {0}" -f $fullstorepath)
 
     return $fullstorepath
 }
@@ -91,12 +84,12 @@ function  Register-ImageFile {
     $cachefile = Update-ImageCacheFile($downloadurl)
     $storepath = Initialize-WSLStoreLocation($registrationname)
 
-    Write-Host("cachefile returned: {0}" -f $cachefile)
+    Write-Host("cachefile:       : {0}" -f $cachefile)
     Write-Host("registration name: {0}" -f $registrationname)
-    Write-Host("storepath: {0}" -f $storepath)
+    Write-Host("storepath:         {0}" -f $storepath)
 
-    Write-Host("going to run: wsl.exe --import {0} {1} {2}" -f $registrationname,$storepath,$cachefile)
-    wsl.exe --import $registrationname $storepath $cachefile
+    Write-Host("going to run: wsl.exe --import {0} {1} {2}" -f $registrationname,"$storepath","$cachefile")
+    wsl.exe --import $registrationname "$storepath" "$cachefile"
 }
 
 
