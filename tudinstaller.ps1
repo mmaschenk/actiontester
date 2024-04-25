@@ -75,9 +75,9 @@ function Initialize-WSLStoreLocation {
     if (Test-Path $fullstorepath) {
         throw ("Directory {0} already exists." -f $fullstorepath)
     }
-    New-Item -Path $fullstorepath -ItemType Directory > $null
+    New-Item -Path $fullstorepath -ItemType Directory 
 
-    Write-Host("Fullstorepath: {0}" -f $fullstorepath)
+    Write-Host("Created Fullstorepath: {0}" -f $fullstorepath)
 
     return $fullstorepath
 }
@@ -99,5 +99,5 @@ function  Register-ImageFile {
 }
 
 
-Write-Host("Installing: {0}" -f $downloadurl)
+Write-Host("Installing:  {0}" -f $downloadurl)
 Register-ImageFile -downloadurl $downloadurl
