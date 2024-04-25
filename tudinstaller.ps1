@@ -40,21 +40,19 @@ function Update-ImageCacheFile {
     $remotehash = Invoke-WebRequest -URI $hashurl
 
     $remotehashvalue = [System.Text.Encoding]::ASCII.GetString($remotehash.Content).Trim()
-    Write-Host("Local hash value: [{0}]" -f $localhashvalue)
+    Write-Host("Local hash value:  [{0}]" -f $localhashvalue)
     Write-Host("Remote hash value: [{0}]" -f $remotehashvalue)
 
     if ($remotehashvalue -ne $localhashvalue) {
-        Write-Host "Need to download"
+        Write-Host "* Need to download image file"
         $webclient = New-Object System.Net.WebClient
-        Write-Host "Downloading image"
+        Write-Host "* Downloading image file"
         $webclient.DownloadFile($downloadurl, $imagefile.ToString())
-        Write-Host "Image downloaded"
+        Write-Host "* Imagefile downloaded"
     }
 
     Write-Host $remotehashvalue.GetType()
     Write-Host $localhashvalue.GetType()
-
-    Write-Host ("[{0}] =?= [{1}]" -f $remotehashvalue, $localhashvalue)
 
     return $imagefile
 }
@@ -97,6 +95,7 @@ function  Register-ImageFile {
     Write-Host("registration name: {0}" -f $registrationname)
     Write-Host("storepath: {0}" -f $storepath)
 
+    Write-Host("going to run: wsl.exe --import {0} {1} {2}" -f $registrationname,$storepath,$cachefile)
     wsl.exe --import $registrationname $storepath $cachefile
 }
 
