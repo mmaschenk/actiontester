@@ -27,6 +27,8 @@ function Update-ImageCacheFile {
     Write-Host "Imagefile", $imagefile
     Write-Host "Hashurl", $hashurl
 
+    New-Item -ItemType Directory -Path $cachepath -ErrorAction SilentlyContinue
+
     if (Test-Path -Path $imagefile -PathType leaf) {
         Write-Host "Image file already present"
         $localhashvalue = (Get-FileHash $imagefile).Hash.Trim()
