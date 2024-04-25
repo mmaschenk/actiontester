@@ -20,20 +20,20 @@ function Update-ImageCacheFile {
     $imagefile = Join-Path -Path $cachepath -ChildPath $basename
     $hashurl = "${downloadurl}.hash"
 
-    Write-Host "Downloadurl", $downloadurl
-    Write-Host "Base is", $base
-    Write-Host "Storename", $storename
-    Write-Host "Cache path", $cachepath
-    Write-Host "Imagefile", $imagefile
-    Write-Host "Hashurl", $hashurl
+    Write-Host "Downloadurl:   ", $downloadurl
+    Write-Host "Base is:       ", $base
+    Write-Host "Storename:     ", $storename
+    Write-Host "Cache path:    ", $cachepath
+    Write-Host "Imagefile:     ", $imagefile
+    Write-Host "Hashurl:       ", $hashurl
 
     New-Item -ItemType Directory -Path $cachepath -ErrorAction SilentlyContinue
 
     if (Test-Path -Path $imagefile -PathType leaf) {
-        Write-Host "Image file already present"
+        Write-Host "* Image file already present"
         $localhashvalue = (Get-FileHash $imagefile).Hash.Trim()
     } else {
-        Write-Host "Image file not yet present"
+        Write-Host "* Image file not yet present"
         $localhashvalue = "NOTPRESENT"
     }
 
@@ -72,9 +72,11 @@ function Initialize-WSLStoreLocation {
 
     $fullstorepath = Join-Path -Path $storename -ChildPath $distribution
 
+    Write-Host("Checking for: {0} existence" -f $fullstorepath)
     if (Test-Path $fullstorepath) {
         throw ("Directory {0} already exists." -f $fullstorepath)
     }
+    Write-Host("Going to create: {0} existence" -f $fullstorepath)
     New-Item -Path $fullstorepath -ItemType Directory 
 
     Write-Host("Created Fullstorepath: {0}" -f $fullstorepath)
