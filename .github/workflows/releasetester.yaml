@@ -39,6 +39,8 @@ jobs:
           Get-ChildItem
       - name: Test
         run: cat Release.txt
+        env:
+          MINOR: ${{steps.build.outputs.minor}}
       - name: Release
         uses: softprops/action-gh-release@v2
         #if: startsWith(github.ref, 'refs/tags/')
