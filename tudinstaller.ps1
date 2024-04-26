@@ -70,7 +70,7 @@ function Initialize-WSLStoreLocation {
         throw ("Directory {0} already exists." -f $fullstorepath)
     }
     New-Item -Path $fullstorepath -ItemType Directory 
-    Write-Host("Created fullstorepath: {0}" -f $fullstorepath)
+    Write-Host("Created fullstorepath: {0} [{1}]" -f $fullstorepath, $fullstorepath.getType())
 
     return $fullstorepath
 }
