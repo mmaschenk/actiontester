@@ -26,6 +26,7 @@ jobs:
             $Env:LINK = "Latest link"
           }
           Get-Content README.md | foreach { [Environment]::ExpandEnvironmentVariables($_) } | Set-Content README.rendered.md
+          Get-ChildItem
       - name: Test
         run: cat Release.txt
       - name: Release
