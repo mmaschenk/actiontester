@@ -9,7 +9,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: echo ${{ github.sha }} > Release.txt
+        run: |
+          echo ${{ github.sha }} > Release.txt
+          dir env:
       - name: Test
         run: cat Release.txt
       - name: Release
