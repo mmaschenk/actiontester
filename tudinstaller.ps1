@@ -73,7 +73,7 @@ function Initialize-WSLStoreLocation {
     Write-Host("Created fullstorepath: {0} [{1}]" -f $fullstorepath, $fullstorepath.getType())
 
     Write-Host("returning: {0} [{1}]" -f $fullstorepath, $fullstorepath.getType())
-    return $fullstorepath
+    return $fullstorepath.ToString()
 }
 
 function  Register-ImageFile {
