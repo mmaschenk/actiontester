@@ -82,14 +82,14 @@ function  Register-ImageFile {
     )
 
     $cachefile = Update-ImageCacheFile($downloadurl)
-    $storepath = Initialize-WSLStoreLocation($registrationname)
+    $fullstorepath = Initialize-WSLStoreLocation($registrationname)
 
     Write-Host("cachefile:       : {0} [{1}]" -f $cachefile, $cachefile.getType())
     Write-Host("registration name: {0} [{1}]" -f $registrationname, $registrationname.getType())
-    Write-Host("storepath:         {0} [{1}]" -f $storepath, $storepath.getType())
+    Write-Host("storepath:         {0} [{1}]" -f $fullstorepath, $fullstorepath.getType())
 
-    Write-Host("going to run: wsl.exe --import {0} {1} {2}" -f $registrationname,"$storepath","$cachefile")
-    wsl.exe --import $registrationname "$storepath" "$cachefile"
+    Write-Host("going to run: wsl.exe --import {0} {1} {2}" -f $registrationname,"$fullstorepath","$cachefile")
+    wsl.exe --import $registrationname "$fullstorepath" "$cachefile"
 }
 
 
