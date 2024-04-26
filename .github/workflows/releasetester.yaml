@@ -23,7 +23,7 @@ jobs:
           if ($minor % 2 -eq 0) {
             Add-Content -Path $Env:GITHUB_OUTPUT -Value "draft=0"
           } else {
-            Add-Content -Path $Env:GITHUB_OUTPUT -Value "minor=1"
+            Add-Content -Path $Env:GITHUB_OUTPUT -Value "draft=1"
           }
           dir env:
           echo "1"
