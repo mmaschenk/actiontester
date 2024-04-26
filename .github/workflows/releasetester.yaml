@@ -17,9 +17,14 @@ jobs:
           X_DRAFT: ${{ github.ref_name != 'main' }}
         run: |
           echo ${{ github.sha }} > Release.txt
-          $minor = ($Env:GITHUB_REF_NAME -split "\.")[1]
+          $minor = [int]($Env:GITHUB_REF_NAME -split "\.")[1]
           Add-Content -Path $Env:GITHUB_OUTPUT -Value "minor=$minor"
           echo "Minor", $minor
+          if ($minor % 2 -eq 0) {
+            Add-Content -Path $Env:GITHUB_OUTPUT -Value "draft=0"
+          } else {
+            Add-Content -Path $Env:GITHUB_OUTPUT -Value "minor=1"
+          }
           dir env:
           echo "1"
           $x = "5"
@@ -41,6 +46,7 @@ jobs:
         run: cat Release.txt
         env:
           MINOR: ${{steps.build.outputs.minor}}
+          DRAFT: ${{steps.build.outputs.draft}}
       - name: Release
         uses: softprops/action-gh-release@v2
         #if: startsWith(github.ref, 'refs/tags/')
