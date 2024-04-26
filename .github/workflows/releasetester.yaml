@@ -25,7 +25,7 @@ jobs:
           } else {
             $Env:LINK = "Latest link"
           }
-          Get-Content README.md | foreach { [Environment]::ExpandEnvironmentVariables($_) } | sc README.rendered.md
+          Get-Content README.md | foreach { [Environment]::ExpandEnvironmentVariables($_) } | Set-Content README.rendered.md
       - name: Test
         run: cat Release.txt
       - name: Release
