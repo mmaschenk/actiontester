@@ -11,14 +11,21 @@ jobs:
       - name: Build
         env:
           XXX: false
-          X_PRERELEASE: ${{ github.ref_name != 'main' }}
+          X_DRAFT: ${{ github.ref_name != 'main' }}
         run: |
           echo ${{ github.sha }} > Release.txt
           dir env:
+          [bool] $draft = [System.Convert]::ToBoolean($Env:X_DRAFT)
+          if ($draft) {
+            $Env:LINK = "Release link"
+          } else {
+            $Env:LINK = "Latest link"
+          }
+          Get-Content README.md | foreach { [Environment]::ExpandEnvironmentVariables($_) } | sc README.rendered.md
       - name: Test
         run: cat Release.txt
       - name: Release
         uses: softprops/action-gh-release@v2
         #if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: README.md
+          files: README.rendered.md
