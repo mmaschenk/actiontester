@@ -20,10 +20,14 @@ jobs:
           echo "2"
           [bool] $draft = [System.Convert]::ToBoolean($Env:X_DRAFT)
           echo "3"
+          echo $draft
+          echo "4"
           if ($draft) {
             $Env:LINK = "Release link"
+            echo "5"
           } else {
             $Env:LINK = "Latest link"
+            echo "6"
           }
           Get-Content README.md | foreach { [Environment]::ExpandEnvironmentVariables($_) } | Set-Content README.rendered.md
           Get-ChildItem
