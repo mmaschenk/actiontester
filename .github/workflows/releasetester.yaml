@@ -11,11 +11,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
+        id: build
         env:
           XXX: false
           X_DRAFT: ${{ github.ref_name != 'main' }}
         run: |
           echo ${{ github.sha }} > Release.txt
+          $minor = ($Env:GITHUB_REF_NAME -split "\.")[1]
+          Add-Content -Path $Env:GITHUB_OUTPUT -Value "minor=$minor"
+          echo "Minor", $minor
           dir env:
           echo "1"
           $x = "5"
