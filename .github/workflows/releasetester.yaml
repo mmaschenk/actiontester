@@ -25,6 +25,8 @@ jobs:
           } else {
             Add-Content -Path $Env:GITHUB_OUTPUT -Value "draft=1"
           }
+          $baseurl = "https://github.com/$Env:GITHUB_REPOSITORY/releases/download/$Env:GITHUB_REF_NAME/"
+          echo "Base url", $baseurl
           dir env:
           echo "1"
           $x = "5"
@@ -33,13 +35,8 @@ jobs:
           echo "3"
           echo $draft
           echo "4"
-          if ($draft) {
-            $Env:LINK = "Release link"
-            echo "5"
-          } else {
-            $Env:LINK = "Latest link"
-            echo "6"
-          }
+          $Env:LINK = "$baseurl/tudinstaller.ps1"
+          
           Get-Content README.md | foreach { [Environment]::ExpandEnvironmentVariables($_) } | Set-Content README.rendered.md
           Get-ChildItem
       - name: Test
@@ -52,4 +49,4 @@ jobs:
         #if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: README.rendered.md
-          prerelease: ${{steps.build.outputs.draft}}
+          draft: ${{steps.build.outputs.draft}}
