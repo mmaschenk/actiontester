@@ -15,7 +15,11 @@ jobs:
         run: |
           echo ${{ github.sha }} > Release.txt
           dir env:
+          echo "1"
+          $x = "5"
+          echo "2"
           [bool] $draft = [System.Convert]::ToBoolean($Env:X_DRAFT)
+          echo "3"
           if ($draft) {
             $Env:LINK = "Release link"
           } else {
