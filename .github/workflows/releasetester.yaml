@@ -3,7 +3,7 @@ on:
 permissions:
   contents: write
 env:
-  XX_DRAFT: ${{ github.ref_name != 'main' }}
+  DRAFT: ${{ github.ref_name != 'main' }}
 jobs:
   build:
     runs-on: windows-latest
@@ -40,4 +40,4 @@ jobs:
         #if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: README.rendered.md
-          draft: 
+          draft: ${{ env.DRAFT }}
