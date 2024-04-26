@@ -52,4 +52,4 @@ jobs:
         #if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: README.rendered.md
-          draft: ${{steps.build.outputs.draft}}
+          prerelease: ${{steps.build.outputs.draft}}
