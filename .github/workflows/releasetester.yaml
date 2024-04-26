@@ -11,6 +11,7 @@ jobs:
       - name: Build
         env:
           XXX: false
+          X_PRERELEASE: ${{ github.ref_name != 'main' }}
         run: |
           echo ${{ github.sha }} > Release.txt
           dir env:
