@@ -72,6 +72,7 @@ function Initialize-WSLStoreLocation {
     New-Item -Path $fullstorepath -ItemType Directory 
     Write-Host("Created fullstorepath: {0} [{1}]" -f $fullstorepath, $fullstorepath.getType())
 
+    Write-Host("returning: {0} [{1}]" -f $fullstorepath, $fullstorepath.getType())
     return $fullstorepath
 }
 
@@ -83,6 +84,7 @@ function  Register-ImageFile {
 
     $cachefile = Update-ImageCacheFile($downloadurl)
     $fullstorepath = Initialize-WSLStoreLocation($registrationname)
+    Write-Host("receiving: {0} [{1}]" -f $fullstorepath, $fullstorepath.getType())
 
     Write-Host("cachefile:       : {0} [{1}]" -f $cachefile, $cachefile.getType())
     Write-Host("registration name: {0} [{1}]" -f $registrationname, $registrationname.getType())
